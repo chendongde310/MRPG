@@ -10,7 +10,7 @@ public class BaseRole extends BaseObject {
 
     String gender ; //性别
     String age; //年龄
-  
+
 
 
 }

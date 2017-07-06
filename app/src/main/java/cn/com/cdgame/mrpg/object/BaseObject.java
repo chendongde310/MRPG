@@ -6,7 +6,7 @@ package cn.com.cdgame.mrpg.object;
  */
 
 public class BaseObject {
-
+    String id;
     String name;
 
 }
