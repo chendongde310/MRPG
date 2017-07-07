@@ -6,14 +6,14 @@ import java.util.List;
  *
  * Author：陈东
  * Time：2017/7/6  - 下午3:10
- * Notes: 输出内容，
+ * Notes: 输出内容处理器
  */
 
-public class OutputBody {
+public class OutputBodyHandler {
 
     List<String > out;
 
-    public OutputBody( ) {
+    public OutputBodyHandler( ) {
 
 
     }
@@ -22,7 +22,7 @@ public class OutputBody {
      * 快捷的返回一个回复
      * @param inputBody
      */
-    public OutputBody(InputBody inputBody) {
+    public OutputBodyHandler(InputBodyHandler inputBody) {
 
 
     }

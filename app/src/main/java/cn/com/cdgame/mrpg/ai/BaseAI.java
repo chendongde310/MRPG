@@ -4,18 +4,35 @@ import com.hankcs.hanlp.seg.common.Term;
 
 import java.util.List;
 
+import cn.com.cdgame.mrpg.object.npc.BaseNPC;
+import cn.com.cdgame.mrpg.object.npc.TalkCallback;
+
 /**
  * 通用智能，词汇检索，基本回答
  */
 
 public class BaseAI {
-
-    InputBody inputBody;
-    OutputBody outputBody;
+    BaseNPC baseNPC;
+    InputBodyHandler inputBody;
+    OutputBodyHandler outputBody;
     List<Term> keys; //关键词
 
 
+    public BaseAI(BaseNPC baseNPC) {
+        this.baseNPC = baseNPC;
+    }
 
+
+    /**
+     * 首先分词，
+     * 优先检索 基本词汇库
+     * 然后进行分词-关键词检索
+     * @param body
+     * @param talkCallback
+     */
+    public void talking(String body, TalkCallback talkCallback) {
+
+    }
 
 
 

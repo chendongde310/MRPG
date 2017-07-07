@@ -18,7 +18,7 @@ public class Emotion {
      *
      *  -5 以下会拒绝回答玩家的提问，-10会主动（逃离／攻击）玩家
      */
-    int value;
+   public int value;
 
 
 

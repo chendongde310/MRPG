@@ -1,7 +1,5 @@
 package cn.com.cdgame.mrpg.abst;
 
-import java.util.List;
-
 /**
  *
  * Author：陈东
@@ -12,17 +10,20 @@ import java.util.List;
  */
 public class Friendliness   {
 
-    int value; //数值
-    List<NPCFriendliness>  npcFriendlinesses ;
+   public int value; //数值
 
-    /**
-     * 对其他NPC的亲密度
-     */
-    public static class NPCFriendliness {
-        int value; //数值
-        String formId; //对象npc
 
-    }
+//暂不设置
+//    List<NPCFriendliness>  npcFriendlinesses ;
+//
+//    /**
+//     * 对其他NPC的亲密度
+//     */
+//    public static class NPCFriendliness {
+//        int value; //数值
+//        String formId; //对象npc
+//
+//    }
 
 
 
