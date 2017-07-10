@@ -1,4 +1,4 @@
-package cn.com.cdgame.mrpg.ai;
+package cn.com.cdgame.mrpg.handler;
 
 import java.util.List;
 

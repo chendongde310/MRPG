@@ -4,6 +4,8 @@ import com.hankcs.hanlp.seg.common.Term;
 
 import java.util.List;
 
+import cn.com.cdgame.mrpg.handler.InputBodyHandler;
+import cn.com.cdgame.mrpg.handler.OutputBodyHandler;
 import cn.com.cdgame.mrpg.object.npc.BaseNPC;
 import cn.com.cdgame.mrpg.object.npc.TalkCallback;
 
@@ -27,6 +29,7 @@ public class BaseAI {
      * 首先分词，
      * 优先检索 基本词汇库
      * 然后进行分词-关键词检索
+     * 用关键词匹配相关语料库
      * @param body
      * @param talkCallback
      */
