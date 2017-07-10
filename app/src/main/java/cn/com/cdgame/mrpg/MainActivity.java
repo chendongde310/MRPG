@@ -2,38 +2,41 @@ package cn.com.cdgame.mrpg;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import com.hankcs.hanlp.HanLP;
+
 import cn.com.cdgame.mrpg.abst.Emotion;
 import cn.com.cdgame.mrpg.abst.Friendliness;
 import cn.com.cdgame.mrpg.abst.Job;
 import cn.com.cdgame.mrpg.object.npc.BaseNPC;
 import cn.com.cdgame.mrpg.object.npc.TalkCallback;
+import cn.com.cdgame.mrpg.tools.CharAnalysisTool;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.textView)
+
     TextView textView;
-    @BindView(R.id.editText)
     EditText editText;
-    @BindView(R.id.button)
     Button button;
+    BaseNPC testnpc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-
+        this.button = (Button) findViewById(R.id.button);
+        this.editText = (EditText) findViewById(R.id.editText);
+        this.textView = (TextView) findViewById(R.id.textView);
+        HanLP.Config.ShowTermNature = false;
+        CharAnalysisTool.tool.init(this);
         test();
+
     }
 
-    BaseNPC testnpc;
     private void test() {
         testnpc = new BaseNPC();
         testnpc.setAge("20");
@@ -51,20 +54,23 @@ public class MainActivity extends AppCompatActivity {
         testnpc.setJob(job);
         testnpc.setFriendliness(friendliness);
         testnpc.setEmotion(emotion);
-    }
 
-    @OnClick(R.id.button)
-    public void onClick() {
-        testnpc.talking(editText.getText().toString(), new TalkCallback() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onNext(String reply) {
-                textView.setText(reply);
-            }
+            public void onClick(View v) {
+                testnpc.talking(editText.getText().toString(), new TalkCallback() {
+                    @Override
+                    public void onNext(String reply) {
+                        textView.setText(reply);
+                    }
 
-            @Override
-            public void onError() {
-                textView.setText("这个人不知道你在说什么的样子");
+                    @Override
+                    public void onError() {
+                        textView.setText("这个人不知道你在说什么的样子");
+                    }
+                });
             }
         });
     }
+
 }

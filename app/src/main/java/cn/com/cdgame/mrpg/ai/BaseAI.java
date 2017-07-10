@@ -8,6 +8,7 @@ import cn.com.cdgame.mrpg.handler.InputBodyHandler;
 import cn.com.cdgame.mrpg.handler.OutputBodyHandler;
 import cn.com.cdgame.mrpg.object.npc.BaseNPC;
 import cn.com.cdgame.mrpg.object.npc.TalkCallback;
+import cn.com.cdgame.mrpg.tools.CharAnalysisTool;
 
 /**
  * 通用智能，词汇检索，基本回答
@@ -34,7 +35,12 @@ public class BaseAI {
      * @param talkCallback
      */
     public void talking(String body, TalkCallback talkCallback) {
-
+        DataBody dataBody =   CharAnalysisTool.tool.getOutput(body);
+        if(dataBody!=null&&dataBody.getOutput()!=null)
+        talkCallback.onNext(dataBody.getOutput().get(0));  //// TODO: 2017/7/11 0011 添加随机 ，判断情绪
+        else {
+            talkCallback.onError();
+        }
     }
 
 
