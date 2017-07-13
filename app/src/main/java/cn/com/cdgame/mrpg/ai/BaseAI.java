@@ -31,19 +31,20 @@ public class BaseAI {
      * 优先检索 基本词汇库
      * 然后进行分词-关键词检索
      * 用关键词匹配相关语料库
+     *
      * @param body
      * @param talkCallback
      */
     public void talking(String body, TalkCallback talkCallback) {
-        DataBody dataBody =   CharAnalysisTool.tool.getOutput(body);
-        if(dataBody!=null&&dataBody.getOutput()!=null)
-        talkCallback.onNext(dataBody.getOutput().get(0));  //// TODO: 2017/7/11 0011 添加随机 ，判断情绪
+        DataBody dataBody = CharAnalysisTool.tool.getOutput(body);
+
+
+        if (dataBody != null && dataBody.getOutput() != null)
+            talkCallback.onNext(dataBody.getOutput().get(0));  //// TODO: 2017/7/11 0011 添加随机 ，判断情绪
         else {
             talkCallback.onError();
         }
     }
-
-
 
 
 }

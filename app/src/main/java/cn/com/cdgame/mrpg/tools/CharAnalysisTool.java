@@ -27,7 +27,8 @@ public class CharAnalysisTool {
 
     public DataBody getOutput(String input) {
 
-        return datas.get(input);
+
+        return datas.get(input.trim());
     }
 
 
@@ -54,7 +55,7 @@ public class CharAnalysisTool {
 //        1.读取XML文件,获得document对象
         SAXReader reader = new SAXReader();
         try {
-            Document document = reader.read(context.getAssets().open("tongyong.xml"));
+            Document document = reader.read(context.getAssets().open("base.xml"));
             for (Element item : document.getRootElement().elements("item")) {
                 DataBody body = new DataBody();
                 body.setInput(item.element("i").getText());
@@ -65,9 +66,7 @@ public class CharAnalysisTool {
                 body.setOutput(s);
                 datas.put(body.getInput(),body);
             }
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (DocumentException | IOException e) {
             e.printStackTrace();
         }
     }
