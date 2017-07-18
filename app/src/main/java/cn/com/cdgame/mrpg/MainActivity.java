@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         job.setName("商贩");
         job.setLv("1");
         Friendliness friendliness = new Friendliness(); //友善值
-        friendliness.value = 10;
+        friendliness.value = 0;
         testnpc.setJob(job);
         testnpc.setFriendliness(friendliness);
         testnpc.setEmotion(emotion);

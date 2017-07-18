@@ -2,6 +2,7 @@ package cn.com.cdgame.mrpg.tools;
 
 import android.content.Context;
 
+import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -72,8 +73,12 @@ public class CharAnalysisTool {
         for (Element output : item.elements(name)) {
             DataBody.Item itemData = new DataBody.Item();
             itemData.setBody(output.getText());
-            itemData.setFriendly(output.attribute("friendly").getValue());
-            itemData.setAction(output.attribute("action").getValue());
+            Attribute friendly = output.attribute("friendly");
+            Attribute action = output.attribute("action");
+            if (friendly != null)
+                itemData.setFriendly(friendly.getValue());
+            if (action != null)
+                itemData.setAction(action.getValue());
             s.add(itemData);
         }
         return s;

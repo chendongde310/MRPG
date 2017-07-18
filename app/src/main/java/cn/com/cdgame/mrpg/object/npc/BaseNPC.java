@@ -13,9 +13,15 @@ import cn.com.cdgame.mrpg.object.role.BaseRole;
  */
 
 public class BaseNPC extends BaseRole {
+    BaseAI ai; //脑子
     Emotion emotion; //当前情绪
     Job job;  //职业
     Friendliness friendliness; //友善值
+
+
+    public BaseNPC( ) {
+        ai = new BaseAI(this);
+    }
 
     /**
      * 交谈
@@ -25,11 +31,7 @@ public class BaseNPC extends BaseRole {
         if(TextUtils.isEmpty(body)||talkCallback==null){
             return;
         }
-
-        BaseAI ai = new BaseAI(this);
         ai.talking(body,talkCallback);
-
-
     }
 
 

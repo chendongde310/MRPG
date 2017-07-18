@@ -39,10 +39,10 @@ public class BaseAI {
         DataBody dataBody = CharAnalysisTool.tool.getOutput(body);
         if (dataBody != null && dataBody.getOutput() != null) {
             //先判断下情绪
-            List<String> replys;
-            if (baseNPC.getEmotion().value > 0) {
+            List<DataBody.Item> replys;
+            if (baseNPC.getFriendliness().value > 0) {
                 replys = dataBody.getOutput1();
-            } else if (baseNPC.getEmotion().value < 0) {
+            } else if (baseNPC.getFriendliness().value < 0) {
                 replys = dataBody.getOutput2();
             } else {
                 replys = dataBody.getOutput();
@@ -57,18 +57,21 @@ public class BaseAI {
                 }
             }
             //再随机
-            int num = (int) (Math.random() * replys.size()) - 1;
-            if (num < 0) {
+            int num = (int) (Math.random() * replys.size());
+            if (num < 0||num >=replys.size() ) {
                 num = 0;
             }
-            String reply = replys.get(num);
-
+            DataBody.Item item =replys.get(num);
+            String reply = item.getBody();
             reply = reply.replace("@job", baseNPC.getJob().getName()).
                     replace("@name", baseNPC.getName());
             //行为
 
+            //友好度
+            if(item.getFriendly()!=null)
+            baseNPC.getFriendliness().change(item.getFriendly());
 
-            talkCallback.onNext(reply);  //// TODO: 2017/7/11 0011 添加随机 ，判断情绪
+            talkCallback.onNext(reply+baseNPC.getFriendliness().value);  //// TODO: 2017/7/11 0011 添加随机 ，判断情绪
         } else {
             talkCallback.onError();
         }
