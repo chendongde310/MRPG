@@ -24,6 +24,8 @@ public class CharAnalysisTool {
 
 
     public static CharAnalysisTool tool = new CharAnalysisTool();
+    // List<DataBody> datas = new ArrayList<>();
+    HashMap<String, DataBody> datas = new HashMap<>();
 
     public DataBody getOutput(String input) {
 
@@ -31,25 +33,19 @@ public class CharAnalysisTool {
         return datas.get(input.trim());
     }
 
-
-
-
-
     /**
      * 初始化这个工具，在打开应用的时候加载语料库
      */
-    public void init(Context context ) {
-        loadBaseData(context );
+    public void init(Context context) {
+        loadBaseData(context);
 
 
     }
 
     /**
      * 加载基本语料，例如  {你好 ; 再见}  等回答
-     *
      */
     private void loadBaseData(Context context) {
-
 
 
 //        1.读取XML文件,获得document对象
@@ -59,18 +55,27 @@ public class CharAnalysisTool {
             for (Element item : document.getRootElement().elements("item")) {
                 DataBody body = new DataBody();
                 body.setInput(item.element("i").getText());
-                List<String> s = new ArrayList<>();
-                for (Element output:item.elements("o")) {
-                    s.add(output.getText());
-                }
-                body.setOutput(s);
-                datas.put(body.getInput(),body);
+
+                body.setOutput(getData(item, "o"));
+                body.setOutput1(getData(item, "o1"));
+                body.setOutput2(getData(item, "o2"));
+                datas.put(body.getInput(), body);
             }
         } catch (DocumentException | IOException e) {
             e.printStackTrace();
         }
     }
 
-   // List<DataBody> datas = new ArrayList<>();
-    HashMap<String ,DataBody> datas = new HashMap<>();
+
+    private List<DataBody.Item> getData(Element item, String name) {
+        List<DataBody.Item> s = new ArrayList<>();
+        for (Element output : item.elements(name)) {
+            DataBody.Item itemData = new DataBody.Item();
+            itemData.setBody(output.getText());
+            itemData.setFriendly(output.attribute("friendly").getValue());
+            itemData.setAction(output.attribute("action").getValue());
+            s.add(itemData);
+        }
+        return s;
+    }
 }

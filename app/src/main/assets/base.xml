@@ -10,18 +10,18 @@
 <data>
     <item>
         <i>你好</i>
-        <o>你好，@job</o>
+        <o>你好，朋友</o>
         <o>你好</o>
         <o>嗯...</o>
         <o2>抱歉，我并不好</o2>
         <o1>你好，很高兴见到你</o1>
     </item>
 
-    <item>
+    <item >
         <i>再见</i>
-        <o>再见，@job</o>
+        <o friendly="1" action="#endTalk">再见，朋友</o>
         <o>拜拜</o>
-        <o1>后会有期，我的朋友</o1>
+        <o1 friendly="2">后会有期，我的朋友</o1>
         <o>再见</o>
         <o2>抱歉，我并不想再遇见你</o2>
     </item>
@@ -33,8 +33,13 @@
     </item>
 
     <item>
-        <i>早上好</i>
+        <i friendly="1">早上好</i>
         <o>早上好朋友</o>
+    </item>
+
+    <item>
+        <i>你是谁</i>
+        <o>我叫@name,是一个@job</o>
     </item>
 
 </data>

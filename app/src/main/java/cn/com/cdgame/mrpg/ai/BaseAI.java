@@ -37,11 +37,39 @@ public class BaseAI {
      */
     public void talking(String body, TalkCallback talkCallback) {
         DataBody dataBody = CharAnalysisTool.tool.getOutput(body);
+        if (dataBody != null && dataBody.getOutput() != null) {
+            //先判断下情绪
+            List<String> replys;
+            if (baseNPC.getEmotion().value > 0) {
+                replys = dataBody.getOutput1();
+            } else if (baseNPC.getEmotion().value < 0) {
+                replys = dataBody.getOutput2();
+            } else {
+                replys = dataBody.getOutput();
+
+            }
+
+            if (replys == null || replys.size() == 0) {
+                replys = dataBody.getOutput();
+                if (replys == null || replys.size() == 0) {
+                    talkCallback.onError();
+                    return;
+                }
+            }
+            //再随机
+            int num = (int) (Math.random() * replys.size()) - 1;
+            if (num < 0) {
+                num = 0;
+            }
+            String reply = replys.get(num);
+
+            reply = reply.replace("@job", baseNPC.getJob().getName()).
+                    replace("@name", baseNPC.getName());
+            //行为
 
 
-        if (dataBody != null && dataBody.getOutput() != null)
-            talkCallback.onNext(dataBody.getOutput().get(0));  //// TODO: 2017/7/11 0011 添加随机 ，判断情绪
-        else {
+            talkCallback.onNext(reply);  //// TODO: 2017/7/11 0011 添加随机 ，判断情绪
+        } else {
             talkCallback.onError();
         }
     }
