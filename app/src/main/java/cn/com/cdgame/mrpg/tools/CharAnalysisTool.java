@@ -45,6 +45,10 @@ public class CharAnalysisTool {
 
     /**
      * 加载基本语料，例如  {你好 ; 再见}  等回答
+     * todo -- 1017/7/19
+     * {你好 ; 再见}不能算是基本语句，每个人面对这些句子都可能有不同的回答
+     * 基本的应该是一些常识语句，例如我们 { }
+     *
      */
     private void loadBaseData(Context context) {
 
@@ -52,7 +56,7 @@ public class CharAnalysisTool {
 //        1.读取XML文件,获得document对象
         SAXReader reader = new SAXReader();
         try {
-            Document document = reader.read(context.getAssets().open("base.xml"));
+            Document document = reader.read(context.getAssets().open("talk/base.xml"));
             for (Element item : document.getRootElement().elements("item")) {
                 DataBody body = new DataBody();
                 body.setInput(item.element("i").getText());
