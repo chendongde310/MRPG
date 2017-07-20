@@ -33,7 +33,13 @@ public class MainActivity extends AppCompatActivity {
         this.textView = (TextView) findViewById(R.id.textView);
         HanLP.Config.ShowTermNature = false;
         CharAnalysisTool.tool.init(this);
-        test();
+        // test();
+
+
+
+
+
+
 
     }
 
